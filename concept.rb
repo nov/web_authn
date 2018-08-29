@@ -1,5 +1,5 @@
 # Common
-context = WebAuthn::Context.new(
+context = WebAuthn.context_for(
   client_data_json,
   origin: request.base_url,
   challenge: session[:challenge],
