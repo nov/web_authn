@@ -1,38 +1,21 @@
-
-lib = File.expand_path("../lib", __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require "web_authn/version"
-
-Gem::Specification.new do |spec|
-  spec.name          = "web_authn"
-  spec.version       = WebAuthn::VERSION
-  spec.authors       = ["Nov Matake"]
-  spec.email         = ["nov@matake.jp"]
-
-  spec.summary       = %q{TODO: Write a short summary, because RubyGems requires one.}
-  spec.description   = %q{TODO: Write a longer description or delete this line.}
-  spec.homepage      = "TODO: Put your gem's website or public repo URL here."
-  spec.license       = "MIT"
-
-  # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
-  # to allow pushing to a single host or delete this section to allow pushing to any host.
-  if spec.respond_to?(:metadata)
-    spec.metadata["allowed_push_host"] = "TODO: Set to 'http://mygemserver.com'"
-  else
-    raise "RubyGems 2.0 or newer is required to protect against " \
-      "public gem pushes."
-  end
-
-  # Specify which files should be added to the gem when it is released.
-  # The `git ls-files -z` loads the files in the RubyGem that have been added into git.
-  spec.files         = Dir.chdir(File.expand_path('..', __FILE__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  end
-  spec.bindir        = "exe"
-  spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
-
-  spec.add_development_dependency "bundler", "~> 1.16"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+Gem::Specification.new do |gem|
+  gem.name          = 'web_authn'
+  gem.version     = File.read('VERSION')
+  gem.authors     = ['nov matake']
+  gem.email       = ['nov@matake.jp']
+  gem.homepage    = 'https://github.com/nov/web_authn'
+  gem.summary     = %q{W3C WebAuthn (a.k.a. FIDO2) RP library in Ruby}
+  gem.description = %q{W3C WebAuthn (a.k.a. FIDO2) RP library in Ruby}
+  gem.license     = 'MIT'
+  gem.files         = `git ls-files`.split("\n")
+  gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  gem.require_paths = ['lib']
+  gem.required_ruby_version = '>= 2.3'
+  gem.add_runtime_dependency 'json-jwt', '>= 1.9.4'
+  gem.add_runtime_dependency 'cbor', '>= 0.5.9.3'
+  gem.add_development_dependency 'rake', '~> 10.0'
+  gem.add_development_dependency 'simplecov'
+  gem.add_development_dependency 'rspec'
+  gem.add_development_dependency 'rspec-its'
 end
