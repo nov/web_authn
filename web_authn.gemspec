@@ -13,7 +13,8 @@ Gem::Specification.new do |gem|
   gem.require_paths = ['lib']
   gem.required_ruby_version = '>= 2.3'
   gem.add_runtime_dependency 'activesupport'
-  gem.add_runtime_dependency 'cbor', '>= 0.5.9.3'
+  gem.add_runtime_dependency 'cbor'
+  gem.add_runtime_dependency 'cose'
   gem.add_runtime_dependency 'json-jwt'
   gem.add_development_dependency 'rake', '~> 10.0'
   gem.add_development_dependency 'simplecov'

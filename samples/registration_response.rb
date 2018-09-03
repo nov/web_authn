@@ -1,8 +1,8 @@
 require 'web_authn'
 
-response = 'o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVjEMsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJVBAAAAAAAAAAAAAAAAAAAAAAAAAAAAQLnOJcueDVfD1xEm7GlriX-KkLwT-ZFkdXLTqGsTpW_BTxD20gyY1UD53t7jnm90tYgnlscCRZo96B2lxSJ6KWalAQIDJiABIVggy39miPIu8MSTtoOYMk6HXPlLREHBy_5p8qrom-EzJTkiWCBeNi9p-_tmcZg3ZbKXXzJ6b1iOBq8mP6NlbgDFISRiSw'
+attestation_object = 'o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVjEMsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJVBAAAAMAAAAAAAAAAAAAAAAAAAAAAAQM1zXqvmYeVH9o2q1YcBZDSlkhvVs_2RjnKESVUktkQwQnYcU8jdo-duNLKrIOZNg0g4RCm0UMDZxtdXhR2bCu2lAQIDJiABIVggDMGhDLXoZit2uSMLyL-_emlFrGzlH7b2KpKpgYNzPRYiWCAl795OxcS2QimEnC9Jl_pNG3Gy_9O6m3_GbZdGsk90aw'
 
-client_data_json = 'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJvcmlnaW4iOiJodHRwczovL3dlYi1hdXRobi5zZWxmLWlzc3VlZC5hcHAiLCJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIn0'
+client_data_json = 'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJuZXdfa2V5c19tYXlfYmVfYWRkZWRfaGVyZSI6ImRvIG5vdCBjb21wYXJlIGNsaWVudERhdGFKU09OIGFnYWluc3QgYSB0ZW1wbGF0ZS4gU2VlIGh0dHBzOi8vZ29vLmdsL3lhYlBleCIsIm9yaWdpbiI6Imh0dHBzOi8vd2ViLWF1dGhuLnNlbGYtaXNzdWVkLmFwcCIsInR5cGUiOiJ3ZWJhdXRobi5jcmVhdGUifQ'
 
 origin = 'https://web-authn.self-issued.app'
 challenge = 'cmFuZG9tLXN0cmluZy1nZW5lcmF0ZWQtYnktcnAtc2VydmVy'
@@ -12,3 +12,16 @@ context = WebAuthn.context_for(
   origin: origin,
   challenge: challenge
 )
+
+context.verify! attestation_object
+
+puts <<-OUT
+# Credential ID
+#{context.credential_id}
+
+# Public Key
+#{context.public_key.to_pem}
+
+# Sign Count
+#{context.sign_count}
+OUT

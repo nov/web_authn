@@ -22,7 +22,7 @@ module WebAuthn
 
     class << self
       def for(encoded_client_data_json, origin:, challenge:)
-        client_data_json = ClientDataJson.decode encoded_client_data_json
+        client_data_json = ClientDataJSON.decode encoded_client_data_json
 
         context = case client_data_json.type
         when 'webauthn.create'
@@ -33,7 +33,7 @@ module WebAuthn
           raise 'Unknown Client Data JSON Type'
         end
 
-        context.verify_session!(origin, challenge)
+        context.verify_session!(origin: origin, challenge: challenge)
       end
     end
   end

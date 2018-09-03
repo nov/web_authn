@@ -1,7 +1,13 @@
 require 'active_support'
 require 'active_support/core_ext'
+require 'cbor'
+require 'cose'
+require 'cose/key/ec2'
+require 'json/jwt'
 
 module WebAuthn
+  module_function
+
   def context_for(encoded_client_data_json, origin:, challenge:)
     Context.for(
       encoded_client_data_json,
