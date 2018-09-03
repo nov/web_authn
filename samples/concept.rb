@@ -6,7 +6,7 @@ context = WebAuthn.context_for(
 )
 
 # Registration
-raise if context.registration?
+raise unless context.registration?
 
 context.verify!(params[:attestation_object])
 current_account.fido_authenticators.create(
@@ -16,7 +16,7 @@ current_account.fido_authenticators.create(
 )
 
 # Authentication
-raise if context.authentication?
+raise unless context.authentication?
 
 fido_authentiator = FIDO::Authenticatior.find_by(credential_id: params[:credential_id])
 raise unless fido_authentiator.present?

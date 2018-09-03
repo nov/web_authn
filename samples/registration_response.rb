@@ -12,10 +12,20 @@ context = WebAuthn.context_for(
   origin: origin,
   challenge: challenge
 )
+raise unless context.registration?
 
 context.verify! attestation_object
 
 puts <<-OUT
+# RP ID Hash
+#{context.rp_id_hash}
+
+# Flags
+up: #{context.flags.up}
+uv: #{context.flags.uv}
+at: #{context.flags.at}
+ex: #{context.flags.ex}
+
 # Credential ID
 #{context.credential_id}
 

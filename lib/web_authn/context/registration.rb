@@ -4,7 +4,7 @@ module WebAuthn
       attr_accessor :attestation_object
 
       # TODO: will need more methods, or let developers access deep methods by themselves.
-      %i(credential_id public_key sign_count).each do |method|
+      %i(credential_id rp_id_hash flags public_key sign_count).each do |method|
         delegate method, to: :attestation_object
       end
 

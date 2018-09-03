@@ -5,7 +5,7 @@ module WebAuthn
     alias_method :att_stmt,  :attestation_statement
     alias_method :auth_data, :authenticator_data
 
-    %i(credential_id public_key sign_count).each do |method|
+    %i(credential_id rp_id_hash flags public_key sign_count).each do |method|
       delegate method, to: :authenticator_data
     end
 

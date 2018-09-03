@@ -3,7 +3,7 @@ module WebAuthn
     attr_accessor :rp_id_hash, :flags, :sign_count, :attested_credential_data
 
     %i(credential_id public_key).each do |method|
-      delegate method, to: :attested_credential_data
+      delegate method, to: :attested_credential_data, allow_nil: true
     end
 
     def initialize(rp_id_hash:, flags:, sign_count:, attested_credential_data: nil)
