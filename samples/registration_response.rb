@@ -1,0 +1,14 @@
+require 'web_authn'
+
+response = 'o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVjEMsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJVBAAAAAAAAAAAAAAAAAAAAAAAAAAAAQLnOJcueDVfD1xEm7GlriX-KkLwT-ZFkdXLTqGsTpW_BTxD20gyY1UD53t7jnm90tYgnlscCRZo96B2lxSJ6KWalAQIDJiABIVggy39miPIu8MSTtoOYMk6HXPlLREHBy_5p8qrom-EzJTkiWCBeNi9p-_tmcZg3ZbKXXzJ6b1iOBq8mP6NlbgDFISRiSw'
+
+client_data_json = 'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJvcmlnaW4iOiJodHRwczovL3dlYi1hdXRobi5zZWxmLWlzc3VlZC5hcHAiLCJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIn0'
+
+origin = 'https://web-authn.self-issued.app'
+challenge = 'cmFuZG9tLXN0cmluZy1nZW5lcmF0ZWQtYnktcnAtc2VydmVy'
+
+context = WebAuthn.context_for(
+  client_data_json,
+  origin: origin,
+  challenge: challenge
+)
