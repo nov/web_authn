@@ -22,7 +22,12 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+See samples for usage.
+
+Currently, there are several restrictions.
+* only `none` attestation format is supported.
+* only EC key w/ `P-(256|384|521)` public key is supported.
+* authenticator data w/ extensions aren't supported.
 
 ## Development
 
