@@ -39,9 +39,10 @@ module WebAuthn
           raw_authenticator_data,
           OpenSSL::Digest::SHA256.digest(raw_client_data_json)
         ].join
-        result = public_key.dsa_verify_asn1(
-          OpenSSL::Digest::SHA256.digest(signature_base_string),
-          Base64.urlsafe_decode64(signature)
+        result = public_key.verify(
+          OpenSSL::Digest::SHA256.new,
+          Base64.urlsafe_decode64(signature),
+          signature_base_string
         )
         if result
           self
