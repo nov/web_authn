@@ -8,7 +8,7 @@ sign_count = 73
 client_data_json = 'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJvcmlnaW4iOiJodHRwczovL3dlYi1hdXRobi5zZWxmLWlzc3VlZC5hcHAiLCJ0eXBlIjoid2ViYXV0aG4uZ2V0In0'
 
 origin = 'https://web-authn.self-issued.app'
-challenge = 'cmFuZG9tLXN0cmluZy1nZW5lcmF0ZWQtYnktcnAtc2VydmVy'
+challenge = 'random-string-generated-by-rp-server'
 
 public_key = OpenSSL::PKey::EC.new <<-PEM
 -----BEGIN PUBLIC KEY-----

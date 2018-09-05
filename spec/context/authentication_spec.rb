@@ -12,7 +12,7 @@ RSpec.describe WebAuthn::Context::Authentication do
       'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJvcmlnaW4iOiJodHRwczovL3dlYi1hdXRobi5zZWxmLWlzc3VlZC5hcHAiLCJ0eXBlIjoid2ViYXV0aG4uZ2V0In0'
     end
     let(:origin) { 'https://web-authn.self-issued.app' }
-    let(:challenge) { 'cmFuZG9tLXN0cmluZy1nZW5lcmF0ZWQtYnktcnAtc2VydmVy' }
+    let(:challenge) { 'random-string-generated-by-rp-server' }
     let(:rp_id_hash) do
       'MsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJU'
     end
