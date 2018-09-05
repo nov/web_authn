@@ -1,3 +1,4 @@
+require 'openssl'
 require 'active_support'
 require 'active_support/core_ext'
 require 'cbor'
