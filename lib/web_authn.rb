@@ -3,7 +3,6 @@ require 'active_support/core_ext'
 require 'cbor'
 require 'cose'
 require 'cose/key/ec2'
-require 'json/jwt'
 
 module WebAuthn
   class Exception < StandardError; end

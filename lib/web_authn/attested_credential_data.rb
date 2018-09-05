@@ -22,26 +22,29 @@ module WebAuthn
           attested_credential_data.byteslice((18 + length)..-1),
         ]
         cose_key = COSE::Key::EC2.from_cbor(_encoded_cose_key_)
-        crv = case cose_key.curve
+        curve_name = case cose_key.curve
         when 1
-          :'P-256'
+          'prime256v1'
         when 2
-          :'P-384'
+          'secp384r1'
         when 3
-          :'P-521'
+          'secp521r1'
         else
           raise NotImplementedError, 'Non-supported EC curve'
         end
-        jwk = JSON::JWK.new(
-          kty: :EC,
-          crv: crv,
-          x: Base64.urlsafe_encode64(cose_key.x_coordinate, padding: false),
-          y: Base64.urlsafe_encode64(cose_key.y_coordinate, padding: false),
+        ec_key = OpenSSL::PKey::EC.new curve_name
+        ec_key.public_key = OpenSSL::PKey::EC::Point.new(
+          OpenSSL::PKey::EC::Group.new(curve_name),
+          OpenSSL::BN.new([
+            '04' +
+            cose_key.x_coordinate.unpack('H*').first +
+            cose_key.y_coordinate.unpack('H*').first
+          ].pack('H*'), 2)
         )
         new(
           aaguid: Base64.urlsafe_encode64(aaguid, padding: false),
           credential_id: Base64.urlsafe_encode64(credential_id, padding: false),
-          public_key: jwk.to_key
+          public_key: ec_key
         )
       end
     end
