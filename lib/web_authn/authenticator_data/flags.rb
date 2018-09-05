@@ -14,6 +14,13 @@ module WebAuthn
         self.ex = ex
       end
 
+      def ==(target)
+        up == target.up &&
+        uv == target.uv &&
+        at == target.at &&
+        ex == target.ex
+      end
+
       class << self
         def decode(input)
           bit_array = input.getbyte(0)
