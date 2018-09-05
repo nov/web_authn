@@ -7,8 +7,12 @@ module WebAuthn
     end
 
     def verify_session!(origin:, challenge:)
-      raise 'Invalid Client Data JSON Origin' unless client_data_json.origin == origin
-      raise 'Invalid Client Data JSON Session' unless client_data_json.challenge == challenge
+      if client_data_json.origin != origin
+        raise InvalidContext, 'Invalid Origin'
+      end
+      if client_data_json.challenge != challenge
+        raise InvalidContext, 'Invalid Challenge'
+      end
       self
     end
 
@@ -30,7 +34,7 @@ module WebAuthn
         when 'webauthn.get'
           Authentication.new(client_data_json)
         else
-          raise 'Unknown Client Data JSON Type'
+          raise InvalidContext, 'Unknown Client Data JSON Type'
         end
 
         context.verify_session!(origin: origin, challenge: challenge)

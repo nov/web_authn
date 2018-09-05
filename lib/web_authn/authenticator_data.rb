@@ -25,7 +25,7 @@ module WebAuthn
         flags = Flags.decode(_flags_)
         attested_credential_data = if flags.at?
           if flags.ex?
-            raise 'Extension Data Not Supported Yet'
+            raise NotImplementedError, 'Extension Data Not Supported Yet'
           else
             AttestedCredentialData.decode auth_data.byteslice(37..-1)
           end

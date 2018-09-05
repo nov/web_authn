@@ -1,9 +1,9 @@
 require 'web_authn'
 
-authenticator_data = 'MsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJUBAAAAOw'
+authenticator_data = 'MsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJUBAAAASg'
 
-signature = 'MEUCIQDXp8Wqzz3ZYV7avKvH3R3XQhW7xPYb5Cq2nx3gpflDGwIgPN0tSy2mmgpI06IIKmjrIUxCvL4Rfc53mFXfVd_yL58'
-sign_count = 0
+signature = 'MEYCIQDmAVQcoMNRJiQZe9o5jJMnYvzza3nkDpnWdmdgKYBfwAIhAINDcFyIpIB8fql4QkllVXrQOkICfi595Gkn313gYG2r'
+sign_count = 73
 
 client_data_json = 'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJvcmlnaW4iOiJodHRwczovL3dlYi1hdXRobi5zZWxmLWlzc3VlZC5hcHAiLCJ0eXBlIjoid2ViYXV0aG4uZ2V0In0'
 

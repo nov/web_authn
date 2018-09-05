@@ -30,7 +30,7 @@ module WebAuthn
         elsif before < current
           self
         else
-          raise 'Invalid Sign Count'
+          raise InvalidAssertion, 'Invalid Sign Count'
         end
       end
 
@@ -46,7 +46,7 @@ module WebAuthn
         if result
           self
         else
-          raise 'Invalid Signature'
+          raise InvalidAssertion, 'Invalid Signature'
         end
       end
     end

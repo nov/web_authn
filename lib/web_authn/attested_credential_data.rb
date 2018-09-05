@@ -30,7 +30,7 @@ module WebAuthn
         when 3
           :'P-521'
         else
-          raise 'Non-supported EC curve'
+          raise NotImplementedError, 'Non-supported EC curve'
         end
         jwk = JSON::JWK.new(
           kty: :EC,

@@ -6,6 +6,11 @@ require 'cose/key/ec2'
 require 'json/jwt'
 
 module WebAuthn
+  class Exception < StandardError; end
+  class InvalidContext < Exception; end
+  class InvalidAssertion < Exception; end
+  class NotImplementedError < NotImplementedError; end
+
   module_function
 
   def context_for(encoded_client_data_json, origin:, challenge:)
