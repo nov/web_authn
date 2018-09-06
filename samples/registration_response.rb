@@ -1,3 +1,7 @@
+# NOTE:
+#  get input data below from this link.
+#  https://web-authn.self-issued.app
+
 require 'web_authn'
 
 attestation_object = 'o2NmbXRkbm9uZWdhdHRTdG10oGhhdXRoRGF0YVjEMsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJVBAAAASQAAAAAAAAAAAAAAAAAAAAAAQA3sNJGmV3TJ2Y5pYDZP-DpZIku6rXhmhUZJ5kNNlaI3-4wwfhl296tAl52zStVDUsLVIm4_e4apQWUwl6eGnXalAQIDJiABIVggmQvMomjF0F3asbDWda13XeA1UbXdcS5j3Wg3G1LtgaMiWCBlNRc_WstNxVl56t6fVIJuVjMZqon1GpDp_UDDTXO7_g'

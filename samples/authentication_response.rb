@@ -1,3 +1,7 @@
+# NOTE:
+#  get input data below from this link.
+#  https://web-authn.self-issued.app
+
 require 'web_authn'
 
 authenticator_data = 'MsuA3KzDw1JGLLAfO_4wLebzcS8w_SDs0Zw7pbhYlJUBAAAASg'
