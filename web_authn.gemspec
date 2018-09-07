@@ -1,12 +1,12 @@
 Gem::Specification.new do |gem|
   gem.name          = 'web_authn'
-  gem.version     = File.read('VERSION')
-  gem.authors     = ['nov matake']
-  gem.email       = ['nov@matake.jp']
-  gem.homepage    = 'https://github.com/nov/web_authn'
-  gem.summary     = %q{W3C WebAuthn (a.k.a. FIDO2) RP library in Ruby}
-  gem.description = %q{W3C WebAuthn (a.k.a. FIDO2) RP library in Ruby}
-  gem.license     = 'MIT'
+  gem.version       = File.read('VERSION')
+  gem.authors       = ['nov matake']
+  gem.email         = ['nov@matake.jp']
+  gem.homepage      = 'https://github.com/nov/web_authn'
+  gem.summary       = %q{WebAuthn RP library}
+  gem.description   = %q{W3C Web Authentication API (a.k.a. WebAuthN / FIDO 2.0) RP library in Ruby}
+  gem.license       = 'MIT'
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
