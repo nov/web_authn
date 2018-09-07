@@ -16,7 +16,15 @@ module WebAuthn
         self.attestation_object = AttestationObject.decode(
           encoded_attestation_object
         )
+        verify_flags!
         self
+      end
+
+      private
+
+      def verify_flags!
+        super
+        raise InvalidAssertion, 'Missing Flag: "at"' unless flags.at?
       end
     end
   end

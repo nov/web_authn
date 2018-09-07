@@ -24,6 +24,12 @@ module WebAuthn
       false
     end
 
+    def verify_flags!
+      unless flags.uv? || flags.up?
+        raise InvalidAssertion, 'Missing Flag: uv" nor "up"'
+      end
+    end
+
     class << self
       def for(encoded_client_data_json, origin:, challenge:)
         client_data_json = ClientDataJSON.decode encoded_client_data_json
