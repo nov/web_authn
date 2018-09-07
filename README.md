@@ -22,7 +22,7 @@ Or install it yourself as:
 
 ## Usage
 
-See samples for usage.
+See sample code in this repository, or [working sample site](https://web-authn.herokuapp.com/).
 
 Currently, there are several restrictions.
 * only `none` attestation format is supported.
