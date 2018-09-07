@@ -15,7 +15,7 @@ module WebAuthn
       when 'none'
         nil
       when 'packed', 'tpm', 'android-key', 'android-safetynet', 'fido-u2f'
-        raise NotImplementedError, "Unsupported Attestation Format: #{attestation_object[:fmt]}"
+        raise NotImplementedError, "Unsupported Attestation Format: #{format}"
       else
         raise InvalidContext, 'Unknown Attestation Format'
       end
