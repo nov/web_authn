@@ -22,7 +22,7 @@ module WebAuthn
         )
         verify_flags!
         verify_sign_count!(sign_count)
-        verify_signature!(public_key || public_cose_key, signature, digest)
+        verify_signature!(public_key, public_cose_key, signature, digest)
         self
       end
 
@@ -43,16 +43,13 @@ module WebAuthn
         end
       end
 
-      def verify_signature!(public_key_or_public_cose_key, signature, digest)
+      def verify_signature!(public_key, public_cose_key, signature, digest)
         signature_base_string = [
           authenticator_data.raw,
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)
         ].join
-        public_key, digest = case public_key_or_public_cose_key
-        when COSE::Key
-          [public_key_or_public_cose_key, public_key_or_public_cose_key.digest]
-        else
-          [public_key_or_public_cose_key, digest]
+        if public_cose_key
+          public_key, digest = [public_cose_key, public_cose_key.digest]
         end
         verification_method = case public_key
         when OpenSSL::PKey::RSA
