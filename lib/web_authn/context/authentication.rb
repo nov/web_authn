@@ -40,6 +40,9 @@ module WebAuthn
       end
 
       def verify_signature!(public_key, signature)
+        # TODO:
+        #  needs to handle digest size based on COSE key algorithm.
+        #  how to get COSE key alg header at this point?
         signature_base_string = [
           authenticator_data.raw,
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)

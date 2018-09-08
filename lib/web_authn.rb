@@ -2,8 +2,7 @@ require 'openssl'
 require 'active_support'
 require 'active_support/core_ext'
 require 'cbor'
-require 'cose'
-require 'cose/key/ec2'
+require 'cose/key'
 
 module WebAuthn
   class Exception < StandardError; end
