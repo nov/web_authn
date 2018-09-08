@@ -38,6 +38,7 @@ RSpec.describe WebAuthn::Context::Registration do
     its(:rp_id_hash) { should == rp_id_hash }
     its(:flags) { should == flags }
     its(:public_key) { should be_instance_of OpenSSL::PKey::EC }
+    its(:public_cose_key) { should be_instance_of COSE::Key::EC2 }
     its(:public_key_pem) do
       subject.public_key.to_pem.should == public_key_pem
     end

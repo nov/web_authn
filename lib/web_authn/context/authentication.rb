@@ -12,13 +12,13 @@ module WebAuthn
         true
       end
 
-      def verify!(encoded_authenticator_data, public_key:, sign_count:, signature:)
+      def verify!(encoded_authenticator_data, public_key:, sign_count:, signature:, digest: OpenSSL::Digest::SHA256.new)
         self.authenticator_data = AuthenticatorData.decode(
           Base64.urlsafe_decode64 encoded_authenticator_data
         )
         verify_flags!
         verify_sign_count!(sign_count)
-        verify_signature!(public_key, signature)
+        verify_signature!(public_key, signature, digest)
         self
       end
 
@@ -39,16 +39,20 @@ module WebAuthn
         end
       end
 
-      def verify_signature!(public_key, signature)
-        # TODO:
-        #  needs to handle digest size based on COSE key algorithm.
-        #  how to get COSE key alg header at this point?
+      def verify_signature!(public_key, signature, digest)
         signature_base_string = [
           authenticator_data.raw,
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)
         ].join
-        result = public_key.verify(
-          OpenSSL::Digest::SHA256.new,
+        verification_method = case public_key
+        when OpenSSL::PKey::RSA
+          :verify_pss
+        when OpenSSL::PKey::EC
+          :verify
+        end
+        result = public_key.send(
+          verification_method,
+          digest,
           Base64.urlsafe_decode64(signature),
           signature_base_string
         )

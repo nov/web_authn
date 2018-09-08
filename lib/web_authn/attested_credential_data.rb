@@ -1,11 +1,12 @@
 module WebAuthn
   class AttestedCredentialData
-    attr_accessor :aaguid, :credential_id, :public_key
+    attr_accessor :aaguid, :credential_id, :public_key, :public_cose_key
 
-    def initialize(aaguid:, credential_id:, public_key:)
+    def initialize(aaguid:, credential_id:, public_key:, public_cose_key:)
       self.aaguid = aaguid
       self.credential_id = credential_id
       self.public_key = public_key
+      self.public_cose_key = public_cose_key
     end
 
     class << self
@@ -21,10 +22,12 @@ module WebAuthn
           attested_credential_data.byteslice(18...(18 + length)),
           attested_credential_data.byteslice((18 + length)..-1),
         ]
+        cose_key = COSE::Key.decode(cose_key_cbor)
         new(
           aaguid: Base64.urlsafe_encode64(aaguid, padding: false),
           credential_id: Base64.urlsafe_encode64(credential_id, padding: false),
-          public_key: COSE::Key.decode(cose_key_cbor)
+          public_key: cose_key.to_key,
+          public_cose_key: cose_key
         )
       end
     end

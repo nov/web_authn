@@ -2,7 +2,7 @@ module WebAuthn
   class AuthenticatorData
     attr_accessor :rp_id_hash, :flags, :sign_count, :attested_credential_data, :raw
 
-    %i(credential_id public_key).each do |method|
+    %i(credential_id public_key public_cose_key).each do |method|
       delegate method, to: :attested_credential_data, allow_nil: true
     end
 
