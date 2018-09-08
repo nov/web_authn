@@ -24,7 +24,7 @@ module WebAuthn
         new(
           aaguid: Base64.urlsafe_encode64(aaguid, padding: false),
           credential_id: Base64.urlsafe_encode64(credential_id, padding: false),
-          public_key: COSE::Key.decode(cose_key_cbor).to_key
+          public_key: COSE::Key.decode(cose_key_cbor)
         )
       end
     end
