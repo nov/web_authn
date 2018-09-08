@@ -12,13 +12,17 @@ module WebAuthn
         true
       end
 
-      def verify!(encoded_authenticator_data, public_key:, sign_count:, signature:, digest: OpenSSL::Digest::SHA256.new)
+      def verify!(encoded_authenticator_data, sign_count:, signature:, public_key: nil, public_cose_key: nil, digest: OpenSSL::Digest::SHA256.new)
+        unless public_key || public_cose_key
+          raise ArgumentError, 'missing keyword: public_key or public_cose_key'
+        end
+
         self.authenticator_data = AuthenticatorData.decode(
           Base64.urlsafe_decode64 encoded_authenticator_data
         )
         verify_flags!
         verify_sign_count!(sign_count)
-        verify_signature!(public_key, signature, digest)
+        verify_signature!(public_key || public_cose_key, signature, digest)
         self
       end
 
@@ -39,11 +43,17 @@ module WebAuthn
         end
       end
 
-      def verify_signature!(public_key, signature, digest)
+      def verify_signature!(public_key_or_public_cose_key, signature, digest)
         signature_base_string = [
           authenticator_data.raw,
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)
         ].join
+        public_key, digest = case public_key_or_public_cose_key
+        when COSE::Key
+          [public_key_or_public_cose_key, public_key_or_public_cose_key.digest]
+        else
+          [public_key_or_public_cose_key, digest]
+        end
         verification_method = case public_key
         when OpenSSL::PKey::RSA
           :verify_pss
