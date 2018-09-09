@@ -9,7 +9,7 @@ Gem::Specification.new do |gem|
   gem.license       = 'MIT'
   gem.files         = `git ls-files`.split("\n")
   gem.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
-  gem.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  gem.executables   = `git ls-files -- exe/*`.split("\n").map{ |f| File.basename(f) }
   gem.require_paths = ['lib']
   gem.required_ruby_version = '>= 2.3'
   gem.add_runtime_dependency 'activesupport'
