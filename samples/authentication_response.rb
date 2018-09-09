@@ -30,7 +30,12 @@ raise unless context.authentication?
 
 context.verify!(
   authenticator_data,
+  # NOTE:
+  #  either 'public_key' or 'public_cose_key' is required.
+  #  if `public_key` is given, you can also specify `digest` (default: `OpenSSL::Digest::SHA256.new`).
+  #  if `public_cose_key` is given, it includes digest size information, so no `digest` is required.
   public_key: public_key,
+  # public_cose_key: public_cose_key,
   sign_count: sign_count,
   signature: signature
 )

@@ -36,6 +36,9 @@ ex: #{context.flags.ex}
 # Public Key
 #{context.public_key.to_pem}
 
+# Public COSE Key
+#{context.public_cose_key.raw}
+
 # Sign Count
 #{context.sign_count}
 OUT
