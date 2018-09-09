@@ -49,7 +49,7 @@ module WebAuthn
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)
         ].join
         if public_cose_key
-          public_key, digest = [public_cose_key, public_cose_key.digest]
+          public_key, digest = [public_cose_key.to_key, public_cose_key.digest]
         end
         verification_method = case public_key
         when OpenSSL::PKey::RSA
