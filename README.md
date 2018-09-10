@@ -1,4 +1,12 @@
-# WebAuthn
+
+
+```ruby
+context = WebAuthn.context_for(
+  client_data_json,
+  origin: request.base_url,
+  challenge: session[:challenge],
+)
+```# WebAuthn
 
 W3C Web Authentication API (a.k.a. WebAuthN / FIDO 2.0) RP library in Ruby
 
@@ -25,6 +33,43 @@ $ gem install web_authn
 ```
 
 ## Usage
+
+```ruby
+context = WebAuthn.context_for(
+  client_data_json, # NOTE: URL-safe Base64 encoded
+  origin: request.base_url,
+  challenge: session[:challenge],
+)
+
+if context.registration?
+  context.verify!(
+    attestation_object # URL-safe Base64 encoded
+  )
+  context.credential_id
+  context.public_key # => `OpenSSL::PKey::RSA` or `OpenSSL::PKey::EC`
+  context.public_cose_key # => `COSE::Key::RSA` or `COSE::Key::EC2` ref.) https://github.com/nov/cose-key
+  context.sign_count # => `Integer`
+elsif context.authentication?
+  context.verify!(
+    authenticator_data, # URL-safe Base64 encoded
+
+    # NOTE:
+    #  either 'public_key' or 'public_cose_key' is required.
+    #  if `public_key` is given, you can also specify `digest` (default: `OpenSSL::Digest::SHA256.new`).
+    #  if `public_cose_key` is given, it includes digest size information, so no `digest` is required.
+
+    # public_key: public_key, # `OpenSSL::PKey::RSA` or `OpenSSL::PKey::EC`
+    # digest: OpenSSL::Digest::SHA256.new, # `OpenSSL::Digest::SHA(1|256|384|512)`` (default: `OpenSSL::Digest::SHA256`)
+    public_cose_key: public_cose_key, # `COSE::Key::RSA` or `COSE::Key::EC` ref.) https://github.com/nov/cose-key
+
+    sign_count: previously_stored_sign_count,
+    signature: signature # URL-safe Base64 encoded
+  )
+  context.sign_count # => Integer
+else
+  # should never happen.
+end
+```
 
 See sample code in this repository, or [working sample site](https://web-authn.herokuapp.com/).
 
