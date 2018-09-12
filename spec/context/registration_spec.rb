@@ -77,7 +77,7 @@ RSpec.describe WebAuthn::Context::Registration do
         it do
           expect do
             subject
-          end.to raise_error WebAuthn::InvalidAttestation, 'Invalid Android Safetynet Response Nonce'
+          end.to raise_error WebAuthn::InvalidAttestation, 'Invalid Android Safetynet Response: nonce'
         end
       end
     end

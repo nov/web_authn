@@ -20,12 +20,18 @@ module WebAuthn
             OpenSSL::Digest::SHA256.digest(client_data_json.raw)
           ].join
         ).strip
+
+        # TODO: verify certificate chain.
         response.verify! certs.first.public_key
+
         unless response[:nonce] == nonce
-          raise InvalidAttestation, 'Invalid Android Safetynet Response Nonce'
+          raise InvalidAttestation, 'Invalid Android Safetynet Response: nonce'
+        end
+        unless response[:ctsProfileMatch]
+          raise InvalidAttestation, 'Invalid Android Safetynet Response: ctsProfileMatch'
         end
       rescue JSON::JWS::VerificationFailed => e
-        raise InvalidAttestation, 'Invalid Android Safetynet Response Signature'
+        raise InvalidAttestation, 'Invalid Android Safetynet Response: signature'
       end
 
       class << self
