@@ -3,10 +3,12 @@ require 'active_support'
 require 'active_support/core_ext'
 require 'cbor'
 require 'cose/key'
+require 'json/jwt'
 
 module WebAuthn
   class Exception < StandardError; end
   class InvalidContext < Exception; end
+  class InvalidAttestation < Exception; end
   class InvalidAssertion < Exception; end
   class NotImplementedError < NotImplementedError; end
 
@@ -22,6 +24,7 @@ module WebAuthn
 end
 
 require 'web_authn/attestation_object'
+require 'web_authn/attestation_statement'
 require 'web_authn/attested_credential_data'
 require 'web_authn/authenticator_data'
 require 'web_authn/client_data_json'
