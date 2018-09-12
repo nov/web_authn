@@ -12,9 +12,9 @@ module WebAuthn
         true
       end
 
-      def verify!(encoded_attestation_object)
+      def verify!(encoded_attestation_object, ignore_attestation: false)
         self.attestation_object = AttestationObject.decode(
-          encoded_attestation_object
+          encoded_attestation_object, ignore_attestation: ignore_attestation
         )
         verify_flags!
         self
