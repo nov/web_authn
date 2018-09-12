@@ -16,7 +16,8 @@ module WebAuthn
         nil
       when 'packed', 'tpm', 'android-key', 'android-safetynet', 'fido-u2f'
         if ignore_attestation
-          Warning.warn '[WARN] Skipping Attestation Verification'
+          # NOTE: ruby 2.3.x doesn't have `Warning` module, skip warning for now.
+          # Warning.warn '[WARN] Skipping Attestation Verification'
         else
           raise NotImplementedError, "Unsupported Attestation Format: #{format}"
         end
