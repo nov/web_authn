@@ -64,7 +64,7 @@ module WebAuthn
         # TODO: do we need CRL check?
 
         unless valid_chain && valid_subject && valid_timestamp
-           raise InvalidAttestation, 'Invalid Android Safetynet Response: certificate chain'
+           raise InvalidAttestation, 'Invalid Android Safetynet Response: certificate'
         end
       end
 
