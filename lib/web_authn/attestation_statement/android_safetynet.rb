@@ -18,7 +18,6 @@ module WebAuthn
         verify_signature!
         verify_certificate!
 
-        # TODO: put more ref.) https://www.w3.org/TR/webauthn/#android-safetynet-attestation
         unless response[:ctsProfileMatch]
           raise InvalidAttestation, 'Invalid Android Safetynet Response: ctsProfileMatch'
         end
