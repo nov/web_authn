@@ -16,7 +16,9 @@ module WebAuthn
         nil
       when 'android-safetynet'
         AttestationStatement::AndroidSafetynet.decode att_stmt
-      when 'packed', 'tpm', 'android-key', 'fido-u2f'
+      when 'packed'
+        AttestationStatement::Packed.decode att_stmt
+      when 'tpm', 'android-key', 'fido-u2f'
         raise NotImplementedError, "Unsupported Attestation Format: #{format}"
       else
         raise InvalidContext, 'Unknown Attestation Format'

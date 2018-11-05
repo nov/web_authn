@@ -9,6 +9,10 @@ module WebAuthn
       self.public_cose_key = public_cose_key
     end
 
+    def anonymous?
+      aaguid == 'AAAAAAAAAAAAAAAAAAAAAA' # NOTE: equals to `Base64.urlsafe_encode64("\0" * 16, padding: false)``
+    end
+
     class << self
       def decode(attested_credential_data)
         length = (

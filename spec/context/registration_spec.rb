@@ -44,6 +44,51 @@ RSpec.describe WebAuthn::Context::Registration do
     end
     its(:sign_count) { should == sign_count }
 
+    context 'when packed attestation given' do
+      let(:context) do
+        {
+          origin: 'https://web-authn.self-issued.app',
+          challenge: 'random-string-generated-by-rp-server'
+        }
+      end
+      let(:client_data_json) do
+        'eyJjaGFsbGVuZ2UiOiJjbUZ1Wkc5dExYTjBjbWx1WnkxblpXNWxjbUYwWldRdFlua3RjbkF0YzJWeWRtVnkiLCJvcmlnaW4iOiJodHRwczovL3dlYi1hdXRobi5zZWxmLWlzc3VlZC5hcHAiLCJ0eXBlIjoid2ViYXV0aG4uY3JlYXRlIn0'
+      end
+
+      context 'when self-attestation' do
+        let(:attestation_object) do
+          'o2NmbXRmcGFja2VkZ2F0dFN0bXSiY2FsZyZjc2lnWEYwRAIgOprGUE_GZMIbRBAPLPw6IiNdSk4dxFb4cRbqDgVfFXQCIHnRdm64FfnShyIhq1Z2qfn3ygp0auT32gy-eL35Uo6YaGF1dGhEYXRhWMQyy4DcrMPDUkYssB87_jAt5vNxLzD9IOzRnDuluFiUlUVb2_sTAAAAAAAAAAAAAAAAAAAAAABAAKUVEhUfjXl7S9MbcWXRfXltc39Spl6yuLxOuUtQJ-y-5DkR61Ge8riwY7dRXZFNSaWhsw9LfsknL57eZEB1gKUBAgMmIAEhWCCfkZcOMoafdVwFi4cNNPQlJS1JNUkq34sJ5fKhDODsfyJYIKD89fXxjNhcX6gDxsTwH3VL_TG7HAHdKFgUjAFumfmr'
+        end
+
+        it do
+          expect do
+            subject
+          end.not_to raise_error
+        end
+
+        context 'when client_data_json is invalid' do
+          let(:client_data_json) do
+            Base64.urlsafe_encode64({
+              type: "webauthn.create",
+              challenge: "cmFuZG9tLXN0cmluZy1nZW5lcmF0ZWQtYnktcnAtc2VydmVy",
+              origin: "https://web-authn.self-issued.app",
+              malformed: 'malformed'
+            }.to_json, padding: false)
+          end
+
+          it do
+            expect do
+              subject
+            end.to raise_error WebAuthn::InvalidAttestation, 'Invalid Packed Self Attestation: signature'
+          end
+        end
+      end
+
+      context 'otherwise' do
+        it :TODO
+      end
+    end
+
     context 'when android-safetynet attestation given' do
       let(:context) do
         {
