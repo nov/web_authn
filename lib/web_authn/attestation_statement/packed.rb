@@ -12,6 +12,7 @@ module WebAuthn
 
       def verify!(authenticator_data, client_data_json)
         verify_signature! authenticator_data, client_data_json
+        verify_certificate! unless self_issued?
       end
 
       private
@@ -35,8 +36,24 @@ module WebAuthn
             raise InvalidAttestation, 'Invalid Packed Self Attestation: signature'
           end
         else
-          raise NotImplementedError, "Unsupported Attestation Format: packed"
+          attestation_certificate = OpenSSL::X509::Certificate.new x5c.first
+          public_key = attestation_certificate.public_key
+          digest = case public_key
+          when OpenSSL::PKey::EC
+            COSE::Key::EC2
+          when OpenSSL::PKey::RSA
+            COSE::Key::RSA
+          end.new.tap do |k|
+            k.alg = alg
+          end.digest
+          unless public_key.verify digest, sig, signature_base_string
+            raise InvalidAttestation, 'Invalid Packed Attestation: signature'
+          end
         end
+      end
+
+      def verify_certificate!
+        raise NotImplementedError, 'Certificate Chain Verification Not Implemented Yet: packed'
       end
 
       class << self
