@@ -42,10 +42,8 @@ module WebAuthn
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)
         ].join
 
-        extension = certs.first.extensions.detect { |ext| ext.oid == CERTIFICATE_EXTENSION_OID }
-        expected_nonce = OpenSSL::ASN1.decode(
-          OpenSSL::ASN1.decode(extension.to_der).value.last.value
-        ).value.last.value.last.value
+        extension = certs.first.find_extension(CERTIFICATE_EXTENSION_OID)
+        expected_nonce = OpenSSL::ASN1.decode(extension.value_der).first.value.first.value
 
         unless expected_nonce == nonce
           raise InvalidAttestation, 'Invalid Apple Response: nonce'
