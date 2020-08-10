@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.add_runtime_dependency 'cbor'
   gem.add_runtime_dependency 'cose-key', '>= 0.2.0'
   gem.add_runtime_dependency 'json-jwt'
-  gem.add_development_dependency 'rake', '~> 10.0'
+  gem.add_development_dependency 'rake'
   gem.add_development_dependency 'simplecov'
   gem.add_development_dependency 'rspec'
   gem.add_development_dependency 'rspec-its'
