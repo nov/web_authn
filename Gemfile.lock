@@ -31,7 +31,7 @@ GEM
       aes_key_wrap
       bindata
     minitest (5.11.3)
-    rake (10.5.0)
+    rake (13.0.1)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
       rspec-expectations (~> 3.8.0)
@@ -61,7 +61,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  rake (~> 10.0)
+  rake (~> 13.0)
   rspec
   rspec-its
   simplecov
