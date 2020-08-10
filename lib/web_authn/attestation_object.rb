@@ -18,6 +18,8 @@ module WebAuthn
         AttestationStatement::AndroidSafetynet.decode att_stmt
       when 'packed'
         AttestationStatement::Packed.decode att_stmt
+      when 'apple'
+        AttestationStatement::Apple.decode att_stmt
       when 'tpm', 'android-key', 'fido-u2f'
         raise NotImplementedError, "Unsupported Attestation Format: #{format}"
       else

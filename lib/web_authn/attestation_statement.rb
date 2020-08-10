@@ -4,4 +4,5 @@ module WebAuthn
 end
 
 require 'web_authn/attestation_statement/android_safetynet'
+require 'web_authn/attestation_statement/apple'
 require 'web_authn/attestation_statement/packed'
