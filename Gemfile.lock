@@ -10,27 +10,27 @@ PATH
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (5.2.2)
+    activesupport (5.2.4.3)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
-    aes_key_wrap (1.0.1)
-    bindata (2.4.4)
+    aes_key_wrap (1.1.0)
+    bindata (2.4.8)
     cbor (0.5.9.3)
-    concurrent-ruby (1.1.4)
+    concurrent-ruby (1.1.7)
     cose-key (0.2.0)
       cbor
     diff-lcs (1.3)
     docile (1.3.1)
-    i18n (1.5.1)
+    i18n (1.8.5)
       concurrent-ruby (~> 1.0)
     json (2.1.0)
-    json-jwt (1.10.0)
+    json-jwt (1.12.0)
       activesupport (>= 4.2)
       aes_key_wrap
       bindata
-    minitest (5.11.3)
+    minitest (5.14.1)
     rake (10.5.0)
     rspec (3.8.0)
       rspec-core (~> 3.8.0)
@@ -54,7 +54,7 @@ GEM
       simplecov-html (~> 0.10.0)
     simplecov-html (0.10.2)
     thread_safe (0.3.6)
-    tzinfo (1.2.5)
+    tzinfo (1.2.7)
       thread_safe (~> 0.1)
 
 PLATFORMS
