@@ -19,10 +19,9 @@ module WebAuthn
         -----END CERTIFICATE-----
       PEM
 
-      attr_accessor :alg, :x5c, :certs
+      attr_accessor :x5c, :certs
 
-      def initialize(alg:, x5c:)
-        self.alg = alg
+      def initialize(x5c:)
         self.x5c = Array(x5c)
         self.certs = self.x5c.collect do |x5c|
           OpenSSL::X509::Certificate.new x5c
@@ -78,7 +77,6 @@ module WebAuthn
       class << self
         def decode(att_stmt)
           new(
-            alg: att_stmt[:alg],
             x5c: att_stmt[:x5c]
           )
         end
