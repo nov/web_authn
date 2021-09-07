@@ -27,7 +27,7 @@ module WebAuthn
           OpenSSL::Digest::SHA256.digest(client_data_json.raw)
         ].join
 
-        if self_issued? && authenticator_data.attested_credential_data.anonymous?
+        if self_issued?
           public_cose_key = authenticator_data.attested_credential_data.public_cose_key
           unless alg == public_cose_key.alg
             raise InvalidAttestation, 'Invalid Packed Self Attestation: alg'
