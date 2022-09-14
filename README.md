@@ -2,8 +2,6 @@
 
 W3C Web Authentication API (a.k.a. WebAuthN / FIDO 2.0) RP library in Ruby
 
-[![Build Status](https://secure.travis-ci.org/nov/web_authn.png)](http://travis-ci.org/nov/web_authn)
-
 ## Installation
 
 Add this line to your application's Gemfile:
