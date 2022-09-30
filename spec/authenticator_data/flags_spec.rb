@@ -6,6 +6,8 @@ RSpec.describe WebAuthn::AuthenticatorData::Flags do
       let(:bits) { '00000000' }
       its(:up?) { should == false }
       its(:uv?) { should == false }
+      its(:be?) { should == false }
+      its(:bs?) { should == false }
       its(:at?) { should == false }
       its(:ex?) { should == false }
     end
@@ -14,6 +16,8 @@ RSpec.describe WebAuthn::AuthenticatorData::Flags do
       let(:bits) { '10000000' }
       its(:up?) { should == true }
       its(:uv?) { should == false }
+      its(:be?) { should == false }
+      its(:bs?) { should == false }
       its(:at?) { should == false }
       its(:ex?) { should == false }
     end
@@ -22,6 +26,8 @@ RSpec.describe WebAuthn::AuthenticatorData::Flags do
       let(:bits) { '00100000' }
       its(:up?) { should == false }
       its(:uv?) { should == true }
+      its(:be?) { should == false }
+      its(:bs?) { should == false }
       its(:at?) { should == false }
       its(:ex?) { should == false }
     end
@@ -30,6 +36,8 @@ RSpec.describe WebAuthn::AuthenticatorData::Flags do
       let(:bits) { '00000010' }
       its(:up?) { should == false }
       its(:uv?) { should == false }
+      its(:be?) { should == false }
+      its(:bs?) { should == false }
       its(:at?) { should == true }
       its(:ex?) { should == false }
     end
@@ -38,6 +46,8 @@ RSpec.describe WebAuthn::AuthenticatorData::Flags do
       let(:bits) { '00000001' }
       its(:up?) { should == false }
       its(:uv?) { should == false }
+      its(:be?) { should == false }
+      its(:bs?) { should == false }
       its(:at?) { should == false }
       its(:ex?) { should == true }
     end

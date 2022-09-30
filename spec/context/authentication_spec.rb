@@ -18,7 +18,7 @@ RSpec.describe WebAuthn::Context::Authentication do
     end
     let(:flags) do
       WebAuthn::AuthenticatorData::Flags.new(
-        up: true, uv: false, at: false, ex: false
+        up: true, uv: false, be: false, bs: false, at: false, ex: false
       )
     end
     let(:public_key) do
