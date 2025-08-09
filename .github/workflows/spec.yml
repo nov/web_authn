@@ -9,22 +9,20 @@ permissions:
 
 jobs:
   spec:
+    runs-on: ubuntu-latest
+    name: Ruby ${{ matrix.ruby }}
     strategy:
       matrix:
-        os: ['ubuntu-20.04']
-        ruby-version: ['2.6', '2.7', '3.0', '3.1']
-        # ubuntu 22.04 only supports ssl 3 and thus only ruby 3.1
-        include:
-        - os: 'ubuntu-22.04'
-          ruby-version: '3.1'
-    runs-on: ${{ matrix.os }}
-
+        ruby:
+          - '3.2'
+          - '3.3'
+          - '3.4'
     steps:
     - uses: actions/checkout@v3
     - name: Set up Ruby
       uses: ruby/setup-ruby@v1
       with:
-        ruby-version: ${{ matrix.ruby-version }}
+        ruby-version: ${{ matrix.ruby }}
         bundler-cache: true
     - name: Run Specs
       run: bundle exec rake spec
